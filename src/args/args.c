@@ -1,29 +1,21 @@
 #include <stdio.h>
-/*
-Method 2: Pass by Value
-gcc -Wall -Werror struct-method2.c -o struct-method2
-./struct-method2 
-Name: Alice, Age: 21
-*/
+#include <stdlib.h> // Required for atoi()
 
-// Define the structure
-struct Car {
-    char model[30];
-    int year;
-};
+int main(int argc, char *argv[]) {
+    // 1. Print the total number of arguments
+    printf("Total arguments received (argc): %d\n\n", argc);
 
-// Function accepts the entire structure as a value copy
-void displayCar(struct Car c) {
-    // Use the . operator to access members
-    printf("Model: %s\n", c.model);
-    printf("Year: %d\n", c.year);
-}
+    // 2. Print the program name (always stored at index 0)
+    printf("Program Name (argv[0]): %s\n\n", argv[0]);
 
-int main() {
-    struct Car myCar = {"Mustang", 1969};
+    // 3. Loop through and print any extra arguments provided by the user
+    if (argc > 1) {
+        printf("--- Extra Arguments Passed ---\n");
+        for (int i = 1; i < argc; i++) {
+            printf("argv[%d]: %s\n", i, argv[i]);
+        }
+    } else {
+        printf("No extra arguments were passed.\n");
+    }
 
-    // Pass the entire structure variable directly
-    displayCar(myCar);
-
-    return 0;
-}
+    return 0;}
