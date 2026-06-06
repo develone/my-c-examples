@@ -1,0 +1,124 @@
+06/05/26
+~/my-c-examples/bin/struct-method1
+~/my-c-examples/bin/struct-method2
+~/my-c-examples/bin/test-char-ptr-1
+~/my-c-examples/bin/test-char-ptr-2
+
+struct-method1.c
+#include <stdio.h>
+/*
+Method 1: Pass by Reference (Recommended)
+gcc -Wall -Werror struct-method1.c -o struct-method1
+./struct-method1 
+Name: Alice, Age: 21
+*/
+// Define the structure
+struct Student {
+    char name[50];
+    int age;
+};
+
+// Function accepts a pointer to the structure
+void updateStudent(struct Student *s) {
+    s->age = 21; // Use the -> operator to modify members through a pointer
+}
+
+int main() {
+    struct Student s1 = {"Alice", 20};
+
+    // Pass the address of s1 using the & operator
+    updateStudent(&s1);
+
+    // Output will reflect the change: 21
+    printf("Name: %s, Age: %d\n", s1.name, s1.age);
+
+    return 0;
+}
+
+struct-method2.c
+#include <stdio.h>
+/*
+Method 2: Pass by Value
+gcc -Wall -Werror struct-method2.c -o struct-method2
+./struct-method2
+Model: Mustang
+Year: 1969
+*/
+
+// Define the structure
+struct Car {
+    char model[30];
+    int year;
+};
+
+// Function accepts the entire structure as a value copy
+void displayCar(struct Car c) {
+    // Use the . operator to access members
+    printf("Model: %s\n", c.model);
+    printf("Year: %d\n", c.year);
+}
+
+int main() {
+    struct Car myCar = {"Mustang", 1969};
+
+    // Pass the entire structure variable directly
+    displayCar(myCar);
+
+    return 0;
+}
+
+
+
+test-char-ptr-1.c
+#include <stdio.h>
+#include <stdint.h>
+
+int main() {
+    long long my_number = 42LL;
+    
+    // 1. Declare and initialize a pointer to a long long
+    long long *ptr = &my_number;
+    
+    // 2. Cast the pointer to a 64-bit unsigned integer
+    // uintptr_t guarantees the integer is the exact same size as the pointer
+    uintptr_t address_val = (uintptr_t)ptr;
+    
+    // 3. Print the results
+    printf("Value of my_number: %lld\n", *ptr);
+    printf("Size of pointer: %zu bytes\n", sizeof(ptr));
+    printf("Address (in hex): %p\n", (void *)ptr);
+    printf("Address (as 64-bit integer): 0x%016llx\n", (unsigned long long)address_val);
+    
+    return 0;
+}
+
+test-char-ptr-2.c
+#include <stdio.h>
+/*
+Method 2: Pass by Value
+gcc -Wall -Werror struct-method2.c -o struct-method2
+./struct-method2 
+Name: Alice, Age: 21
+*/
+
+// Define the structure
+struct Car {
+    char model[30];
+    int year;
+};
+
+// Function accepts the entire structure as a value copy
+void displayCar(struct Car c) {
+    // Use the . operator to access members
+    printf("Model: %s\n", c.model);
+    printf("Year: %d\n", c.year);
+}
+
+int main() {
+    struct Car myCar = {"Mustang", 1969};
+
+    // Pass the entire structure variable directly
+    displayCar(myCar);
+
+    return 0;
+}
