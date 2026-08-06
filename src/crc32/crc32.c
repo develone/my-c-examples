@@ -57,6 +57,6 @@ int main(void) {
     // calculate and append the crc
     uint32_t crc_res;
     crc_res = soft_crc32_block(CRC32_INIT, src, DATA_TO_CHECK_LEN);
-    printf("0x%hx\n",crc_res);
+    printf("0x%x\n",crc_res);
     return 0;
 }
